@@ -30,7 +30,7 @@ function myTweets() {
 		if (!error) {
 			// Change this formatting at some point
 			console.log("----- 20 Most Recent Tweets ---------------------------------------------------------------");
-			for (i = 0; i < 20; i++) {
+			for (var i = 0; i < 20; i++) {
 				console.log(i+1 + ". " + tweets[i].text + "(Created on: " + tweets[i].created_at + ")");
 			}
 			console.log("--------------------------------------------------------------------");
@@ -53,9 +53,9 @@ if (spotifyInput === undefined) {
 		}
 
 		else {
-		// Artist
+		// Artist(s) Name
  		console.log(data.album.artists[0].name);
- 		// Song Name
+		// Song Name
 		console.log(data.name);
 		// Preview Link to the song on Spotify
 		console.log(data.preview_url);
@@ -72,10 +72,22 @@ spotify.search({type: "track", query: spotifyInput}, function(err, data) {
         return;
     }
  	else {
- 		// for (i = 0; i < 3; i++) {
-		// Artist
-		console.log(data);
- 		// }
+ 		console.log("----- Top 3 Results ---------------------------------------------------------------");
+ 		for (var i = 0; i < 3; i++) {
+		// Artist(s) Name
+		// Add option to show more than one artist (if necessary?)
+ 			// for (var i = 0; i < data.tracks.items[i].artists.length; i++) { 
+				console.log("Artist(s) Name: " + data.tracks.items[i].artists[0].name + ", " + data.tracks.items[i].artists[1].name);
+			// }
+		// Song Name
+		console.log("Song Name: " + data.tracks.items[i].name);
+		// Preview Link to the song on Spotify
+		console.log("Preview Link: " + data.tracks.items[i].preview_url);
+		// Album Name
+		console.log("Album Name: " + data.tracks.items[i].album.name);
+		console.log("-----");
+ 		}
+ 		console.log("--------------------------------------------------------------------");
  	}
     // Do something with 'data' 
 });
