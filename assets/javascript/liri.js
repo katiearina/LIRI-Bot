@@ -28,9 +28,12 @@ function myTweets() {
 	var params = {screen_name: 'aniratak8'};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
 		if (!error) {
+			// Change this formatting at some point
+			console.log("----- 20 Most Recent Tweets ---------------------------------------------------------------");
 			for (i = 0; i < 20; i++) {
-			console.log(i+1 + ". " + tweets[i].text + "(Created on: " + tweets[i].created_at + ")");
+				console.log(i+1 + ". " + tweets[i].text + "(Created on: " + tweets[i].created_at + ")");
 			}
+			console.log("--------------------------------------------------------------------");
 		}
 	});
 }
