@@ -39,7 +39,47 @@ function myTweets() {
 }
 
 function spotifyThisSong() {
-	console.log("Spotify'd!");
+	// console.log("Spotify'd!");
+var spotify = require('spotify');
+var spotifyInput = process.argv[3];
+
+// If there is no input provided by the user,
+if (spotifyInput === undefined) {
+	// Return information for "The Sign" by Ace of Base! :)
+	spotify.lookup({type: "track", id: "3DYVWvPh3kGwPasp7yjahc"}, function(err, data) {
+		if (err) {
+			console.log('Error occurred: ' + err);
+			return;
+		}
+
+		else {
+		// Artist
+ 		console.log(data.album.artists[0].name);
+ 		// Song Name
+		console.log(data.name);
+		// Preview Link to the song on Spotify
+		console.log(data.preview_url);
+		// Album Name
+		console.log(data.album.name);
+ 	}
+});
+}
+
+else if (spotifyInput !== undefined) {
+spotify.search({type: "track", query: spotifyInput}, function(err, data) {
+    if (err) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+ 	else {
+ 		// for (i = 0; i < 3; i++) {
+		// Artist
+		console.log(data);
+ 		// }
+ 	}
+    // Do something with 'data' 
+});
+}
 }
 
 function movieThis() {
