@@ -12,6 +12,7 @@ var userInput = process.argv[2];
 
 //---------------------------------------------------------------------------
 // FUNCTION DECLARATIONS!
+
 function myTweets() {
 	// console.log("Tweet!");
 	// console.log(twitterKeys.twitterKeys.consumer_key);
@@ -28,7 +29,7 @@ function myTweets() {
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
 		if (!error) {
 			for (i = 0; i < 20; i++) {
-			console.log(i+1 + ". " + tweets[i].text);
+			console.log(i+1 + ". " + tweets[i].text + "(Created on: " + tweets[i].created_at + ")");
 			}
 		}
 	});
