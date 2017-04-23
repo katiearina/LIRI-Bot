@@ -9,6 +9,7 @@ var accessTokenSecret = twitterKeys.twitterKeys.access_token_secret;
 // console.log(twitterKeys);
 
 var userInput = process.argv[2];
+// var multArtists = [];
 
 //---------------------------------------------------------------------------
 // FUNCTION DECLARATIONS!
@@ -31,7 +32,7 @@ function myTweets() {
 			// Change this formatting at some point
 			console.log("----- 20 Most Recent Tweets ---------------------------------------------------------------");
 			for (var i = 0; i < 20; i++) {
-				console.log(i+1 + ". " + tweets[i].text + "(Created on: " + tweets[i].created_at + ")");
+				console.log(i+1 + ". " + tweets[i].text + " (Created on: " + tweets[i].created_at + ")");
 			}
 			console.log("--------------------------------------------------------------------");
 		}
@@ -75,10 +76,15 @@ spotify.search({type: "track", query: spotifyInput}, function(err, data) {
  		console.log("----- Top 3 Results ---------------------------------------------------------------");
  		for (var i = 0; i < 3; i++) {
 		// Artist(s) Name
-		// Add option to show more than one artist (if necessary?)
- 			// for (var i = 0; i < data.tracks.items[i].artists.length; i++) { 
-				console.log("Artist(s) Name: " + data.tracks.items[i].artists[0].name + ", " + data.tracks.items[i].artists[1].name);
-			// }
+		// Finesse this multiple artist display more to make it better looking?
+		// Add condition so that if input return is undefined, it returns an error message? (e.g. "Secondhand News")
+		var multArtists = [];
+ 			for (var j = 0; j < data.tracks.items[j].artists.length; j++) { 
+ 				multArtists.push(data.tracks.items[i].artists[j].name);
+				// console.log("Artist(s) Name: " + data.tracks.items[i].artists[0].name + ", " + data.tracks.items[i].artists[1].name);
+				// console.log("Artist(s) Name: " + data.tracks.items[i].artists[j].name);				
+			}
+		console.log("Artist(s) Name(s): " + multArtists.join(", "));
 		// Song Name
 		console.log("Song Name: " + data.tracks.items[i].name);
 		// Preview Link to the song on Spotify
