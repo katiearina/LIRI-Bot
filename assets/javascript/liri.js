@@ -92,16 +92,63 @@ spotify.search({type: "track", query: spotifyInput}, function(err, data) {
 		// Album Name
 		console.log("Album Name: " + data.tracks.items[i].album.name);
 		console.log("-----");
- 		}
- 		console.log("--------------------------------------------------------------------");
+		}
+		console.log("--------------------------------------------------------------------");
  	}
-    // Do something with 'data' 
 });
 }
 }
 
 function movieThis() {
-	console.log("Movie!");
+	// console.log("Movie!");
+	var request = require('request');
+	var userInput = process.argv[3];
+	var movieInput;
+
+if (userInput === undefined) {
+	movieInput = "Mr. Nobody";
+}
+
+else if (userInput !== undefined) {
+	movieInput = userInput;
+}
+
+	var movieSearchUrl = "http://www.omdbapi.com/?t=" + movieInput + "&y=&plot=short&r=json&tomatoes=true";
+
+	request(movieSearchUrl, function(error, response, body) {
+
+		// If there were no errors and the response code was 200 (i.e. the request was successful)...
+		if (!error && response.statusCode === 200) {
+
+			// console.log(movieSearchUrl);
+			console.log("----- Movie Information ---------------------------------------------------------------");
+
+			// Title of the movie
+			console.log("Movie Title: " + JSON.parse(body).Title);
+
+			// Year the movie came out
+			console.log("Release Year: " + JSON.parse(body).Year);
+
+			// IMDB rating of the movie
+			console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+
+			// Country where the movie was produced
+			console.log("Country of Production: " + JSON.parse(body).Country);
+
+			// Language of the movie
+			console.log("Language: " + JSON.parse(body).Language);
+
+			// Plot of the movie
+			console.log("Short Plot: " + JSON.parse(body).Plot);
+
+			// Actors in the movie
+			console.log("Actors: " + JSON.parse(body).Actors);
+
+			// Rotten Tomatoes URL
+			console.log("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
+			console.log("--------------------------------------------------------------------");
+		}
+	});
 }
 
 function doWhatItSays() {
